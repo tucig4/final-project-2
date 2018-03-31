@@ -17,19 +17,12 @@ public class Player extends GameObject implements Renderer{
 
     public Player(){
         this.renderer = new ImageRenderer("resources/chuongngaivat.png");
+        this.
         this.velocity = new Vector2D();
 
-    }
-    public void create() {
-        for (double angle = 0.0; angle <= 360.0; angle += 30.0) {
-            //this.player = new Player();
-            Vector2D vector2D = new Vector2D(0, 80);
-            Vector2D rotate = vector2D.rotate(angle);
-            this.position.set(rotate);
-            System.out.println(this.position.x);
 
-        }
     }
+
     @Override
     public void run() {
         super.run();
