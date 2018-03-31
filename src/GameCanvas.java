@@ -36,13 +36,9 @@ public class GameCanvas extends JPanel{
         this.player = new Player();
         this.player.position.set(500,500);
         GameObjectManager.instance.add(this.player);
+
     }
-//    private void setPlayerRotate(){
-//        PlayerRotate playerRotate = new PlayerRotate();
-//        playerRotate.position.set(100,100);
-//        playerRotate.create();
-//        GameObjectManager.instance.add(playerRotate);
-//    }
+
 
     private void setupBackground(){
         BackGround backGround = new BackGround();
