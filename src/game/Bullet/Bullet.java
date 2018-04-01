@@ -20,16 +20,33 @@ public class Bullet extends GameObject {
         velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/Bullet/bullet.png");
         animationRenderer = new AnimationRenderer(
-            15, "resources/Bullet/Untitled-1.png",
-                "resources/Bullet/Untitled-113.png",
-                "resources/Bullet/Untitled-114.png",
-                "resources/Bullet/Untitled-115.png",
-                "resources/Bullet/Untitled-116.png",
-                "resources/Bullet/Untitled-117.png",
-                "resources/Bullet/Untitled-118.png",
+            15,"resources/Bullet/01.png",
+                "resources/Bullet/02.png",
+                "resources/Bullet/03.png",
+                "resources/Bullet/04.png",
+                "resources/Bullet/05.png",
+                "resources/Bullet/06.png",
+                "resources/Bullet/07.png",
+                "resources/Bullet/08.png",
+                "resources/Bullet/09.png",
+                "resources/Bullet/10.png",
+                "resources/Bullet/11.png",
+                "resources/Bullet/12.png",
+                "resources/Bullet/13.png",
+                "resources/Bullet/14.png",
+                "resources/Bullet/15.png",
+                "resources/Bullet/16.png",
+                "resources/Bullet/17.png",
+                "resources/Bullet/18.png",
+                "resources/Bullet/19.png",
+                "resources/Bullet/20.png",
+                "resources/Bullet/21.png",
                 "resources/Bullet/Untitled-9.png",
-                "resources/Bullet/Untitled-10.png"
-
+                "resources/Bullet/Untitled-10.png",
+                "resources/Bullet/Untitled-11.png",
+                "resources/Bullet/Untitled-12.png",
+                "resources/Bullet/Untitled-13.png",
+                "resources/Bullet/Untitled-14.png"
                 );
         this.renderer = this.animationRenderer;
         }
@@ -45,8 +62,8 @@ public class Bullet extends GameObject {
 
     public void checkBulletposition(){
         if(animationRenderer.getCurrentIndex()==0){
-            System.out.println(this.position.x);
-            this.velocity.set(-2,0);
+            System.out.println(this.position.x +" "+ this.position.y);
+            this.velocity.set(this.position.x-200,this.position.y-200);
         }
 
     }
