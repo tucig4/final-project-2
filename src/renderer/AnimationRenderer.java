@@ -34,6 +34,10 @@ public class AnimationRenderer implements Renderer {
         this(true, max, paths); //goi constructor phia tren
     }
 
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
+
     @Override
     public void render(Graphics graphics, Vector2D position) {
         if (this.disable) return;
@@ -41,6 +45,8 @@ public class AnimationRenderer implements Renderer {
         if (bufferedImage != null) {
             graphics.drawImage(bufferedImage, (int)position.x - bufferedImage.getWidth() / 2, (int)position.y - bufferedImage.getHeight() / 2, null);
         }
+
+
         if (this.currentIndex == this.images.size() - 1 && !this.isRepeat) {
             this.disable = true;
         } else {

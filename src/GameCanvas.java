@@ -1,7 +1,7 @@
 import base.GameObject;
 import base.GameObjectManager;
+import game.Bullet.Bullet;
 import game.Player.Player;
-import game.Player.PlayerRotate;
 import game.background.BackGround;
 
 import javax.swing.*;
@@ -13,6 +13,7 @@ public class GameCanvas extends JPanel{
     Player player;
     BufferedImage backBuffered;
     Graphics graphics;
+    Bullet bullet;
 
 
     public GameCanvas(){
@@ -20,6 +21,7 @@ public class GameCanvas extends JPanel{
         this.setupBackBuffered();
         this.setupBackground();
         this.setupPlayer();
+        this.setupBullet();
        // this.setPlayerRotate();
     }
 
@@ -37,6 +39,12 @@ public class GameCanvas extends JPanel{
         this.player.position.set(500,500);
         GameObjectManager.instance.add(this.player);
 
+    }
+    private void setupBullet(){
+        this.bullet = new Bullet();
+        this.bullet.position.set(500,500);
+
+        GameObjectManager.instance.add(this.bullet);
     }
 
 

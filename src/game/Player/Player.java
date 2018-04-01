@@ -12,14 +12,14 @@ import java.awt.*;
 
 
 public class Player extends GameObject {
-    private Renderer animationRenderer;
+    public Renderer animationRenderer;
+    //public AnimationRenderer animationRendererPlayer;
     private Renderer imageRender;
     public Vector2D velocity;
     private boolean isAnimation ;
     private FrameCounter frameCounter;
 
     public Player(){
-        this.renderer = new ImageRenderer("resources/chuongngaivat.png");
         this.animationRenderer = new AnimationRenderer(
                 15,
                 "resources/PlayerState/Untitled-1.png",
@@ -38,7 +38,8 @@ public class Player extends GameObject {
                 "resources/PlayerState/Untitled-14.png",
                 "resources/PlayerState/Untitled-15.png"
         );
-        this.frameCounter = new FrameCounter(50);
+        //this.animationRendererPlayer = new AnimationRenderer(1, "resources/Bullet/bullet.png");
+       // this.frameCounter = new FrameCounter(100);
         this.renderer=this.animationRenderer;
         this.velocity = new Vector2D();
         }
