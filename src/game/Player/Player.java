@@ -28,12 +28,8 @@ public class Player extends GameObject {
     @Override
     public void run() {
         super.run();
+        rotateBullet();
 
-        if(keyPressed==false) {
-            rotateBullet();
-        }else {
-            bulletMoving();
-        }
     }
 
     @Override
@@ -54,13 +50,11 @@ public class Player extends GameObject {
         angle+=5;
         Vector2D vector2D = new Vector2D(0,300);
         vector2D = vector2D.rotate(angle);
+        System.out.println(vector2D.y +" "+ vector2D.x);
         bullet.position.set(this.position.add(vector2D));
-    }
-    public void bulletMoving(){
-        angle+=5;
-        Vector2D vector2D = new Vector2D(0,100);
-        vector2D = vector2D.rotate(angle);
-        bullet.velocity.set(-(this.position.add(vector2D).normalize().y),(this.position.add(vector2D).normalize().x));
-        System.out.println(this.position.add(vector2D).normalize().y+" "+ this.position.add(vector2D).normalize().x);
+        if(keyPressed) {
+            System.out.println("------");
+            bullet.velocity.set(-vector2D.y, vector2D.x);
+        }
     }
 }
