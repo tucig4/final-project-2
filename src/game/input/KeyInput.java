@@ -3,15 +3,16 @@ package game.input;
 
 
 import game.Bullet.Bullet;
+import game.Player.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyInput implements KeyListener {
     public static KeyInput instance = new KeyInput();
-    private Bullet bullet;
+    private Player player;
     public KeyInput(){
-        bullet = new Bullet();
+        player = new Player();
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -21,7 +22,7 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode()== KeyEvent.VK_S){
-        bullet.playerPressed=true;
+        player.keyPressed= true;
         }
         if(e.getKeyCode()== KeyEvent.VK_D){
 

@@ -35,16 +35,14 @@ public class GameCanvas extends JPanel{
         this.graphics = this.backBuffered.getGraphics(); // lan chup nhanh cua lan ve cuoi cung va dung de ve trong backbuffered
     }
     private void setupPlayer(){
-        this.player = new Player();
-        this.player.position.set(500,500);
-        GameObjectManager.instance.add(this.player);
+        Player player = GameObjectManager.instance.recycle(Player.class);
+        player.position.set(500,500);
 
-    }
+        }
     private void setupBullet(){
-        this.bullet = new Bullet();
-        this.bullet.position.set(500,500);
 
-        GameObjectManager.instance.add(this.bullet);
+       // this.bullet.position.set(500,500);
+       // GameObjectManager.instance.add(this.bullet);
     }
 
 
