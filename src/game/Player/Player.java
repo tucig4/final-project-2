@@ -18,20 +18,23 @@ public class Player extends GameObject {
     private Renderer imageRender;
     private Image image;
     public static boolean keyPressed = false;
-    public Player(){
-         image = Utils.loadImage("resources/PlayerState/crank.png");
+    private Vector2D rotate;
+    public Player() {
+        image = Utils.loadImage("resources/PlayerState/crank.png");
         //this.imageRender = new ImageRenderer("resources/PlayerState/crank.png");
         bullet = GameObjectManager.instance.recycle(Bullet.class);
-        this.renderer= imageRender;
-        }
-
+        this.renderer = imageRender;
+        this.rotate = new Vector2D(0, 1);
+    }
     @Override
     public void run() {
         super.run();
-        rotateBullet();
-
+        if(!keyPressed) {
+            rotateBullet();
+        }else {
+            bulletMoving();
+        }
     }
-
     @Override
     public void render(Graphics graphics) {
         super.render(graphics);
@@ -45,16 +48,14 @@ public class Player extends GameObject {
         g2d.drawImage(image, (int) this.position.x, (int) this.position.y, null);
         g2d.setTransform(origXform);
     }
-
     public void rotateBullet(){
         angle+=5;
         Vector2D vector2D = new Vector2D(0,300);
-        vector2D = vector2D.rotate(angle);
-        System.out.println(vector2D.y +" "+ vector2D.x);
-        bullet.position.set(this.position.add(vector2D));
-        if(keyPressed) {
-            System.out.println("------");
-            bullet.velocity.set(-vector2D.y, vector2D.x);
-        }
+        rotate.set(vector2D.rotate(angle));
+        bullet.position.set(this.position.add(rotate));
     }
+    public void bulletMoving(){
+        angle+=5;
+        bullet.velocity.set(-rotate.normalize().y, rotate.normalize().x).multiply(20);
+        }
 }
