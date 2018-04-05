@@ -1,34 +1,60 @@
 package base;
 
+
+import physic.BoxCollider;
+import physic.PhysicBody;
+
 import java.awt.*;
 import java.util.Vector;
 
 public class GameObjectManager {
-    public static GameObjectManager instance = new GameObjectManager();
-    private Vector<GameObject> vector;
-    private Vector<GameObject> temp;
 
-    private GameObjectManager(){
-        vector = new Vector<>();
-        temp = new Vector<>();
+    public static GameObjectManager instance = new GameObjectManager(); //chi co duy nhat mot object gameobjectmanager
+
+    private Vector<GameObject> vector = new Vector<>();
+    private Vector<GameObject> temp = new Vector<>();
+
+    //chi dc phep khoi tao object trong class nay, ngoai class thi ko dc
+    private GameObjectManager() {
+
     }
 
-    public void runAll(){ // ham dung de chay tat ca cac gameobject
+    public void runAll() {
         this.vector
                 .stream()
-                .forEach(gameObject -> gameObject.run()); // duyet tung phan tu va cho chay ham run
-        this.vector.addAll(this.temp); //them tat ca cac phan tu trong temp vao vector
-        this.temp.clear(); // xoa phan tu trong temp
+                .filter(gameObject -> gameObject.isAlive)
+                .forEach(gameObject -> gameObject.run());
+        this.vector.addAll(this.temp);
+        this.temp.clear();
     }
 
-    public void renderAll(Graphics graphics){
+    public void renderAll(Graphics graphics) {
         this.vector
                 .stream()
+                .filter(gameObject -> gameObject.isAlive) //loc object dang song
                 .forEach(gameObject -> gameObject.render(graphics));
     }
+
+
+    public <T extends GameObject> T checkCollision(BoxCollider other, Class<T> cls) { //Square
+        return (T) this.vector
+                .stream()
+                .filter(gameObject -> gameObject.isAlive) //loc con con song
+                .filter(gameObject -> cls.isInstance(gameObject)) //kiem tra con gameObject co dung la kieu tra ve mong muon hay ko
+                .filter(gameObject -> gameObject instanceof PhysicBody) // kiem tra GameObject co la PhysicBody hay ko ( de loc ra nhung con co BoxCollider)
+                .filter(gameObject -> {
+                    BoxCollider boxCollider = ((PhysicBody) gameObject).getBoxCollider();//ko null va ta lay dc boxcollider ra
+                    return boxCollider.checkCollider(other);
+                })
+                .findFirst() //lay phan tu dau tien
+                .orElse(null); // tra ve null
+
+    }
+
     public <T extends GameObject> T recycle(Class<T> cls) {
         T t = (T) this.vector
                 .stream()
+                .filter(gameObject -> !gameObject.isAlive) // loc ra nhung con da chet
                 .filter(gameObject -> cls.isInstance(gameObject)) // kt gameObject co kieu == kieu mong muon hay ko
                 .findFirst()
                 .orElse(null);
@@ -45,10 +71,16 @@ public class GameObjectManager {
                 return null;
             }
         }
-
+        t.isAlive = true; // hoi sinh gameObject
         return t;
     }
-    public void add(GameObject gameObject){ // ham nay dung de them gameObject vao temp
+
+    public void add(GameObject gameObject) {
         this.temp.add(gameObject);
+    }
+
+    public void clear() {
+        this.vector.clear();
+        this.temp.clear();
     }
 }

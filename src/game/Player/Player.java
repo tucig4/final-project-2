@@ -45,12 +45,12 @@ public class Player extends GameObject {
         int yRot = (int) this.position.y;
         newXform.rotate(Math.toRadians(angle), xRot, yRot);
         g2d.setTransform(newXform);
-        g2d.drawImage(image, (int) this.position.x, (int) this.position.y, null);
+        g2d.drawImage(image, (int) this.position.x-50, (int) this.position.y-30, null);
         g2d.setTransform(origXform);
     }
     public void rotateBullet(){
         angle+=5;
-        Vector2D vector2D = new Vector2D(0,300);
+        Vector2D vector2D = new Vector2D(0,243);
         rotate.set(vector2D.rotate(angle));
         bullet.position.set(this.position.add(rotate));
     }

@@ -2,6 +2,7 @@ import base.GameObject;
 import base.GameObjectManager;
 import game.Bullet.Bullet;
 import game.Player.Player;
+import game.Point.PointSpawner;
 import game.background.BackGround;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class GameCanvas extends JPanel{
         this.setupBackground();
         this.setupPlayer();
         this.setupBullet();
+        this.setupPoint();
        // this.setPlayerRotate();
     }
 
@@ -44,7 +46,11 @@ public class GameCanvas extends JPanel{
        // this.bullet.position.set(500,500);
        // GameObjectManager.instance.add(this.bullet);
     }
-
+    private void setupPoint(){
+        PointSpawner pointSpawner = GameObjectManager.instance.recycle(PointSpawner.class);
+        pointSpawner.create();
+        GameObjectManager.instance.add(new PointSpawner());
+    }
 
     private void setupBackground(){
         BackGround backGround = new BackGround();
