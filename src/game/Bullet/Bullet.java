@@ -18,7 +18,7 @@ public class Bullet extends GameObject implements PhysicBody, HitObject {
 
             velocity = new Vector2D();
             this.boxCollider = new BoxCollider(86,74);
-            this.runHitObject = new RunHitObject(Point.class);
+            //this.runHitObject = new RunHitObject(Point.class);
         }
 
     @Override
@@ -26,16 +26,13 @@ public class Bullet extends GameObject implements PhysicBody, HitObject {
         super.run();
         this.position.addUp(velocity);
         this.boxCollider.position.set(this.position);
-        this.runHitObject.run(this);
+//        this.runHitObject.run(this);
         }
 
 
     @Override
     public void getHit(GameObject gameObject) {
-            if(gameObject instanceof Point){
-                System.out.println("Point");
-            }
-        this.isAlive = false;
+            this.isAlive = true;
     }
 
     @Override
